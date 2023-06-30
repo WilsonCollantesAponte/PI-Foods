@@ -1,0 +1,2 @@
+export const ADD_CHARACTER = "ADD_CHARACTER";
+export const FILTER_BY_DIETS = "FILTER_BY_DIETS";
