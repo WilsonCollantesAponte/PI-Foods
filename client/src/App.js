@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Cards from "./components/Cards/Cards";
 import Form from "./components/Form/Form";
 import FormCompleted from "./components/FormCompleted/FormCompleted.jsx";
+import Detail from "./components/Detail/Detail";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/Home" element={<Cards />} />
         <Route path="/Form" element={<Form />} />
         <Route path="/FormCompleted" element={<FormCompleted />} />
+        <Route path="/Detail/:id" element={<Detail />} />
       </Routes>
     </div>
   );

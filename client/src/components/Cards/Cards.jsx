@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -21,11 +21,11 @@ export default function Cards() {
 
   const { allCharacters } = useSelector((state) => state);
 
-  // useEffect(() => {
-  //   axios(`http://localhost:3001/recipes`).then(({ data }) => {
-  //     dispatch(add_character(data));
-  //   });
-  // }, []);
+  useEffect(() => {
+    axios(`http://localhost:3001/recipes`).then(({ data }) => {
+      dispatch(add_character(data));
+    });
+  }, []);
 
   const [searchInput, setSearchInput] = useState("");
   const [selectDiet, setSelectDiet] = useState("");
@@ -52,11 +52,6 @@ export default function Cards() {
 
     if (name === "inputSearch") setSearchInput(value);
   }
-
-  // function handleInput(event) {
-  //   const { value } = event.target;
-  //   setSearchInput(value);
-  // }
 
   function handleButton() {
     setSelectDiet("Por defecto");
