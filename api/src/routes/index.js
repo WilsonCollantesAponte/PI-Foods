@@ -8,7 +8,8 @@ const { Op } = require("sequelize");
 const router = Router();
 
 // const { API_KEY } = process.env;
-const API_KEY = "cc1af01257594a209c1e10a3462c5216";
+// const API_KEY = "cc1af01257594a209c1e10a3462c5216";
+const API_KEY = "384bedc0979b4c47852047559c1f0b13";
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
@@ -75,16 +76,18 @@ router.get("/recipes", async (req, res) => {
 
       if (finalDataApi.length)
         finalDataApi = finalDataApi.map((val) => {
-          const { id, title, image, diets } = val;
+          const { id, title, image, diets, healthScore } = val;
 
           const result = {
             id,
             title,
             image: null,
             diets: null,
+            healthScore: null,
           };
 
           if (image) result.image = image;
+          if (healthScore) result.healthScore = healthScore;
           if (diets && diets.length) {
             result.diets = diets;
           }
@@ -108,16 +111,18 @@ router.get("/recipes", async (req, res) => {
       );
 
       const finalDataApi = data.results.map((val) => {
-        const { id, title, image, diets } = val;
+        const { id, title, image, diets, healthScore } = val;
 
         const result = {
           id,
           title,
           image: null,
           diets: null,
+          healthScore: null,
         };
 
         if (image) result.image = image;
+        if (healthScore) result.healthScore = healthScore;
         if (diets && diets.length) result.diets = diets;
 
         return result;

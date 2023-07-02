@@ -1,7 +1,7 @@
 import m from "./Card.module.css";
 
 export default function Card(props) {
-  const { id, title, image, diets } = props;
+  const { id, title, image, diets, healthScore } = props;
 
   const dietsParsed =
     diets.length &&
@@ -21,6 +21,7 @@ export default function Card(props) {
       ) : (
         <h2>Para esta receta no hay dietas que mostrar</h2>
       )}
+      <h1>{healthScore}</h1>
       <img src={image} alt="No hay una imagen disponible" />
     </div>
   );

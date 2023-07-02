@@ -1,9 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import { add_character, filterByDiets } from "../../redux/actions/actions";
+import m from "./Cards.module.css";
+
+import {
+  add_character,
+  filterByDiets,
+  orderByHealthScore,
+  orderByTitle,
+} from "../../redux/actions/actions";
 
 import axios from "axios";
 
@@ -12,33 +19,49 @@ import Card from "../Card/Card";
 export default function Cards() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    axios(`http://localhost:3001/recipes`).then(({ data }) => {
-      dispatch(add_character(data));
-    });
-  }, []);
-
   const { allCharacters } = useSelector((state) => state);
 
-  const [searchInput, setSearchInput] = useState("");
+  // useEffect(() => {
+  //   axios(`http://localhost:3001/recipes`).then(({ data }) => {
+  //     dispatch(add_character(data));
+  //   });
+  // }, []);
 
-  const [select, setSelect] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [selectDiet, setSelectDiet] = useState("");
+  const [seelctTitle, setSelectTitle] = useState("");
+  const [selectHealthScore, setSelectHealthScore] = useState("");
 
   //🗽
 
   function handleFilterByDiet(event) {
-    const { value } = event.target;
-    setSelect(value);
-    dispatch(filterByDiets(value));
+    const { value, name } = event.target;
+    console.log(value, name);
+    if (name === "diets") {
+      setSelectDiet(value);
+      dispatch(filterByDiets(value));
+    }
+    if (name === "titles") {
+      setSelectTitle(value);
+      dispatch(orderByTitle(value));
+    }
+    if (name === "healthScore") {
+      setSelectHealthScore(value);
+      dispatch(orderByHealthScore(value));
+    }
+
+    if (name === "inputSearch") setSearchInput(value);
   }
 
-  function handleInput(event) {
-    const { value } = event.target;
-    setSearchInput(value);
-  }
+  // function handleInput(event) {
+  //   const { value } = event.target;
+  //   setSearchInput(value);
+  // }
 
   function handleButton() {
-    setSelect("Por defecto");
+    setSelectDiet("Por defecto");
+    setSelectHealthScore("Por defecto");
+    setSelectTitle("Por defecto");
 
     axios(`http://localhost:3001/recipes?name=${searchInput}`).then(
       ({ data }) => {
@@ -49,27 +72,50 @@ export default function Cards() {
 
   return (
     <div>
-      <select value={select} onChange={handleFilterByDiet}>
-        <option value="Por defecto">Por defecto</option>
-        <option value="vegetarian">vegetarian</option>
-        <option value="gluten free">gluten free</option>
-        <option value="dairy free">dairy free</option>
-        <option value="lacto ovo vegetarian">lacto ovo vegetarian</option>
-        <option value="vegan">vegan</option>
-        <option value="paleolithic">paleolithic</option>
-        <option value="primal">primal</option>
-        <option value="whole 30">whole 30</option>
-        <option value="pescatarian">pescatarian</option>
-        <option value="ketogenic">ketogenic</option>
-        <option value="fodmap friendly">fodmap friendly</option>
-      </select>
+      <div className={m.bar}>
+        <label className={m.label}>Tipo de dieta</label>
+        <select value={selectDiet} onChange={handleFilterByDiet} name="diets">
+          <option value="Por defecto">Por defecto</option>
+          <option value="vegetarian">vegetarian</option>
+          <option value="gluten free">gluten free</option>
+          <option value="dairy free">dairy free</option>
+          <option value="lacto ovo vegetarian">lacto ovo vegetarian</option>
+          <option value="vegan">vegan</option>
+          <option value="paleolithic">paleolithic</option>
+          <option value="primal">primal</option>
+          <option value="whole 30">whole 30</option>
+          <option value="pescatarian">pescatarian</option>
+          <option value="ketogenic">ketogenic</option>
+          <option value="fodmap friendly">fodmap friendly</option>
+        </select>
 
-      <label>Busca la receta aquí ➡️</label>
-      <input name="inputSearch" type="search" onChange={handleInput} />
-      <button onClick={handleButton}>Buscar</button>
-      <NavLink to="/Form">
-        <button>Agregar nueva receta</button>
-      </NavLink>
+        <label className={m.label}>Ordenar títulos por</label>
+        <select name="titles" value={seelctTitle} onChange={handleFilterByDiet}>
+          <option value="Por defecto">Por defecto</option>
+          <option value="A">Ascendente</option>
+          <option value="D">Descendente</option>
+        </select>
+
+        <label className={m.label}>Ordenar por puntuación de salubridad</label>
+        <select
+          name="healthScore"
+          value={selectHealthScore}
+          onChange={handleFilterByDiet}
+        >
+          <option value="Por defecto">Por defecto</option>
+          <option value="A">Ascendente</option>
+          <option value="D">Descendente</option>
+        </select>
+      </div>
+
+      <div className={m.searchBar}>
+        <label className={m.label}>Busca la receta aquí ➡️</label>
+        <input name="inputSearch" type="search" onChange={handleFilterByDiet} />
+        <button onClick={handleButton}>Buscar</button>
+        <NavLink to="/Form">
+          <button>Agregar nueva receta</button>
+        </NavLink>
+      </div>
 
       {allCharacters.length ? (
         allCharacters.map((val) => {
@@ -80,11 +126,16 @@ export default function Cards() {
               title={val.title}
               image={val.image}
               diets={val.diets}
+              healthScore={val.healthScore}
             />
           );
         })
       ) : (
-        <div>No se han podido identificar dietas con ese tipo de receta</div>
+        <div className={m.notFoundRecipes}>
+          <span className={m.span}>
+            No se han encontrado recetas, prueba buscar otras 😕
+          </span>
+        </div>
       )}
     </div>
   );

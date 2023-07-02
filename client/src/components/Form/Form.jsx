@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import validations from "./validations";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import m from "./Form.module.css";
 
 export default function Form() {
   const navigate = useNavigate();
@@ -96,20 +98,20 @@ export default function Form() {
     setCheckDiets(copyCheckDiets);
   }
 
-  // function handleHome() {
-  //   navigate("/home");
-  // }
+  console.log(checkDiets);
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <Link to="/Home">
-        <button onClick={handleHome}>Cancelar y volver a Home</button>
-      </Link> */}
+      <Link to="/Home">
+        <button>Go to home -- path</button>
+      </Link>
 
-      <div>
+      <div className={m.mainDiv}>
         <label>Título</label>
         <input type="text" name="title" onChange={handleFormData} />
-        {formErrors.title ? <div>{formErrors.title}</div> : null}
+        {formErrors.title ? (
+          <div className={m.error}>{formErrors.title}</div>
+        ) : null}
         <br />
 
         <label>Resumen</label>
@@ -120,7 +122,9 @@ export default function Form() {
           rows="10"
           onChange={handleFormData}
         ></textarea>
-        {formErrors.summary ? <div>{formErrors.summary}</div> : null}
+        {formErrors.summary ? (
+          <div className={m.error}>{formErrors.summary}</div>
+        ) : null}
         <br />
 
         <label>Imagen</label>
@@ -128,7 +132,7 @@ export default function Form() {
           type="url"
           name="image"
           onChange={handleFormData}
-          placeholder="url..."
+          placeholder="                   url..."
         />
         <br />
 
@@ -139,57 +143,56 @@ export default function Form() {
           name="healthScore"
           onChange={handleFormData}
         />
-        {formErrors.healthScore ? <div>{formErrors.healthScore}</div> : null}
+        {formErrors.healthScore ? (
+          <div className={m.error}>{formErrors.healthScore}</div>
+        ) : null}
         <br />
 
         <div>Selecciona tipos de dieta</div>
-        <label>vegetarian</label>
-        <input type="checkbox" name="vegetarian" onChange={handleCheck} />
-        <br />
 
-        <label>gluten free</label>
-        <input type="checkbox" name="gluten free" onChange={handleCheck} />
-        <br />
+        <div className={m.dietsTypes}>
+          <label>vegetarian</label>
+          <input type="checkbox" name="vegetarian" onChange={handleCheck} />
 
-        <label>dairy free</label>
-        <input type="checkbox" name="dairy free" onChange={handleCheck} />
-        <br />
+          <label>gluten free</label>
+          <input type="checkbox" name="gluten free" onChange={handleCheck} />
 
-        <label>lacto ovo vegetarian</label>
-        <input
-          type="checkbox"
-          name="lacto ovo vegetarian"
-          onChange={handleCheck}
-        />
-        <br />
+          <label>dairy free</label>
+          <input type="checkbox" name="dairy free" onChange={handleCheck} />
 
-        <label>vegan</label>
-        <input type="checkbox" name="vegan" onChange={handleCheck} />
-        <br />
+          <label className={m.indentifier}>lacto ovo vegetarian</label>
+          <input
+            className={m.indentifier}
+            type="checkbox"
+            name="lacto ovo vegetarian"
+            onChange={handleCheck}
+          />
 
-        <label>paleolithic</label>
-        <input type="checkbox" name="paleolithic" onChange={handleCheck} />
-        <br />
+          <label>vegan</label>
+          <input type="checkbox" name="vegan" onChange={handleCheck} />
 
-        <label>primal</label>
-        <input type="checkbox" name="primal" onChange={handleCheck} />
-        <br />
+          <label>paleolithic</label>
+          <input type="checkbox" name="paleolithic" onChange={handleCheck} />
 
-        <label>whole 30</label>
-        <input type="checkbox" name="whole 30" onChange={handleCheck} />
-        <br />
+          <label>primal</label>
+          <input type="checkbox" name="primal" onChange={handleCheck} />
 
-        <label>pescatarian</label>
-        <input type="checkbox" name="pescatarian" onChange={handleCheck} />
-        <br />
+          <label>whole 30</label>
+          <input type="checkbox" name="whole 30" onChange={handleCheck} />
 
-        <label>ketogenic</label>
-        <input type="checkbox" name="ketogenic" onChange={handleCheck} />
-        <br />
+          <label>pescatarian</label>
+          <input type="checkbox" name="pescatarian" onChange={handleCheck} />
 
-        <label>fodmap friendly</label>
-        <input type="checkbox" name="fodmap friendly" onChange={handleCheck} />
-        <br />
+          <label>ketogenic</label>
+          <input type="checkbox" name="ketogenic" onChange={handleCheck} />
+
+          <label>fodmap friendly</label>
+          <input
+            type="checkbox"
+            name="fodmap friendly"
+            onChange={handleCheck}
+          />
+        </div>
 
         <label>Pasos</label>
         <textarea
@@ -201,6 +204,7 @@ export default function Form() {
           value={area}
         ></textarea>
         <br />
+
         {count ? <button onClick={handleUpdate}>⬅️</button> : <span>😁</span>}
         <span>Paso {count + 1}</span>
         <button onClick={handlePush}>
@@ -215,8 +219,8 @@ export default function Form() {
         ) : (
           <div>Se han registrado los {arrArea.length} pasos escritos</div>
         )}
-
         <br />
+
         <button
           type="submit"
           disabled={

@@ -1,0 +1,52 @@
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(224, 131, 131),
+    #7be7ac,
+    #e5f36b,
+    rgb(224, 131, 131)
+  );
+  background-repeat: repeat;
+  background-size: 100px 670px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  /* justify-content */
+  padding: 20px;
+}
+
+.dietsTypes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 5px;
+
+  background-image: radial-gradient(
+    ellipse at bottom left,
+    rgb(233, 77, 77),
+    #ddf030,
+    #15ec76
+  );
+  border-radius: 25% 25% 50% 20%;
+}
+
+.error {
+  background-color: red;
+  padding: 10px;
+  margin-top: 7px;
+  border-radius: 6px;
+  transition: 0.5s;
+  color: white;
+}
+
+.error:hover {
+  padding: 15px;
+  color: black;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
