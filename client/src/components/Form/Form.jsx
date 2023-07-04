@@ -103,7 +103,7 @@ export default function Form() {
   return (
     <form onSubmit={handleSubmit}>
       <Link to="/Home">
-        <button>Go to home -- path</button>
+        <button>Cancelar y volver</button>
       </Link>
 
       <div className={m.mainDiv}>

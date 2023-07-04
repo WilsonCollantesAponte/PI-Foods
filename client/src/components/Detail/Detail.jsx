@@ -2,7 +2,7 @@ import m from "./Detail.module.css";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function Detail(props) {
   const { id } = useParams();
@@ -13,7 +13,7 @@ export default function Detail(props) {
     axios(`http://localhost:3001/recipes/${id}`).then(({ data }) => {
       setCharacter(data);
     });
-  }, []);
+  }, [id]);
 
   const { title, image, healthScore, summary, steps } = character;
 
@@ -45,12 +45,18 @@ Paso ${element.number} - ${element.step}
 
   return (
     <div className={m.mainDiv}>
-      <h1>{title}</h1>
-      <img src={image} alt="No hay una imagen para mostar :/" />
-      <h1>Que tan saludable es ? ➡️{healthScore}❤️‍🩹</h1>
-      <div dangerouslySetInnerHTML={{ __html: summary }} />
-      <p />
-      <span className={m.k}>{stringSteps}</span>
+      <Link to="/Home">
+        <button>Volver</button>
+      </Link>
+
+      <div className={m.div2}>
+        <h1 className={m.h1}>{title}</h1>
+        <img src={image} alt="No hay una imagen para mostar 😕" />
+        <h2>Que tan saludable es ? ➡️{healthScore}❤️‍🩹</h2>
+        <h3 dangerouslySetInnerHTML={{ __html: summary }} />
+        <p />
+        <span className={m.cadena}>{stringSteps}</span>
+      </div>
     </div>
   );
 }
