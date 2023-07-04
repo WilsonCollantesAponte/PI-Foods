@@ -3,6 +3,7 @@ import {
   FILTER_BY_DIETS,
   ORDER_BY_HEALTHSCORE,
   ORDER_BY_TITLE,
+  PAGER,
 } from "../actions-types/action-types";
 
 const initialState = {
@@ -73,6 +74,17 @@ export default function reducer(state = initialState, { type, payload }) {
           return 0;
         }),
       };
+
+    case PAGER: {
+      let currentPage = [];
+      for (let index = 9; index > 0; index--) {
+        currentPage.push(state.supportAllCharacters[payload * 9 - index]);
+      }
+      return {
+        ...state,
+        allCharacters: currentPage,
+      };
+    }
 
     default:
       return state;

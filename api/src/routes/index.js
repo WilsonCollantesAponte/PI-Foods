@@ -68,7 +68,7 @@ router.get("/recipes", async (req, res) => {
 
     if (name) {
       const { data } = await axios(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=4&addRecipeInformation=true`
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
       );
 
       let finalDataApi = data.results.filter((val) =>
@@ -108,7 +108,7 @@ router.get("/recipes", async (req, res) => {
       res.status(200).json([...finalDataApi, ...finalDataDb]);
     } else {
       const { data } = await axios(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=4&addRecipeInformation=true`
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
       );
 
       const finalDataApi = data.results.map((val) => {

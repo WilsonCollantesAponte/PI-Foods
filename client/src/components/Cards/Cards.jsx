@@ -10,6 +10,7 @@ import {
   filterByDiets,
   orderByHealthScore,
   orderByTitle,
+  pager,
 } from "../../redux/actions/actions";
 
 import axios from "axios";
@@ -21,22 +22,16 @@ export default function Cards() {
 
   const { allCharacters } = useSelector((state) => state);
 
-  useEffect(() => {
-    axios(`http://localhost:3001/recipes`).then(({ data }) => {
-      dispatch(add_character(data));
-    });
-  }, []);
-
   const [searchInput, setSearchInput] = useState("");
   const [selectDiet, setSelectDiet] = useState("");
   const [seelctTitle, setSelectTitle] = useState("");
   const [selectHealthScore, setSelectHealthScore] = useState("");
+  const [page, setPage] = useState(1);
 
   //🗽
 
   function handleFilterByDiet(event) {
     const { value, name } = event.target;
-    console.log(value, name);
     if (name === "diets") {
       setSelectDiet(value);
       dispatch(filterByDiets(value));
@@ -51,6 +46,10 @@ export default function Cards() {
     }
 
     if (name === "inputSearch") setSearchInput(value);
+
+    if (name === "right") setPage(page + 1);
+
+    if (name === "left") setPage(page - 1);
   }
 
   function handleButton() {
@@ -64,6 +63,16 @@ export default function Cards() {
       }
     );
   }
+
+  useEffect(() => {
+    axios(`http://localhost:3001/recipes`).then(({ data }) => {
+      dispatch(add_character(data));
+
+      dispatch(pager(page));
+    });
+  }, [page]);
+
+  console.log(page);
 
   return (
     <div>
@@ -112,16 +121,29 @@ export default function Cards() {
         </NavLink>
       </div>
 
-      {allCharacters.length ? (
+      <div>
+        {!(page - 1) ? (
+          <span>🐬</span>
+        ) : (
+          <button name="left" onClick={handleFilterByDiet}>
+            ⬅
+          </button>
+        )}
+        <button name="right" onClick={handleFilterByDiet}>
+          ➡
+        </button>
+      </div>
+
+      {allCharacters?.length ? (
         allCharacters.map((val) => {
           return (
             <Card
               key={val.id}
-              id={val.id}
-              title={val.title}
-              image={val.image}
-              diets={val.diets}
-              healthScore={val.healthScore}
+              id={val?.id}
+              title={val?.title}
+              image={val?.image}
+              diets={val?.diets}
+              healthScore={val?.healthScore}
             />
           );
         })

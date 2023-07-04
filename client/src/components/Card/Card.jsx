@@ -6,7 +6,7 @@ export default function Card(props) {
   const { id, title, image, diets, healthScore } = props;
 
   const dietsParsed =
-    diets.length &&
+    diets?.length &&
     diets?.reduce((acc, val) => {
       return val + ", " + acc;
     });
