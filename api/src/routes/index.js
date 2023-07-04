@@ -23,7 +23,8 @@ router.get("/recipes/:idRecipe", async (req, res) => {
       );
 
     if (idRecipe.includes("-")) {
-      const findRecipe = await recipe.findByPk(identificador);
+      const findRecipe = await recipe.findByPk(idRecipe);
+      // const findRecipe = await recipe.findOne({ where: { id: idRecipe } });
       res.status(200).json(findRecipe);
     } else {
       const { data } = await axios(
