@@ -10,7 +10,9 @@ const router = Router();
 // const { API_KEY } = process.env;
 // const API_KEY = "cc1af01257594a209c1e10a3462c5216";
 // const API_KEY = "384bedc0979b4c47852047559c1f0b13";
-const API_KEY = "1c2cb02e6df44567870da179264fed0f";
+// const API_KEY = "1dc56e1c3bb94709b7f677fbd5148483";
+const API_KEY = "d5927eee3ec747bea12a88435c38c7ff";
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 

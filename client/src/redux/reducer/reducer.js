@@ -11,6 +11,7 @@ const initialState = {
   supportAllCharacters: [],
   allCharacters: [],
   postedDiets: [],
+  supportPage: [],
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -32,12 +33,12 @@ export default function reducer(state = initialState, { type, payload }) {
           }
         : {
             ...state,
-            allCharacters: [...state.supportAllCharacters],
+            allCharacters: [...state.supportPage],
           };
 
     case ORDER_BY_TITLE:
       return payload === "Por defecto"
-        ? { ...state, allCharacters: [...state.supportAllCharacters] }
+        ? { ...state, allCharacters: [...state.supportPage] }
         : payload === "A"
         ? {
             ...state,
@@ -58,7 +59,7 @@ export default function reducer(state = initialState, { type, payload }) {
 
     case ORDER_BY_HEALTHSCORE:
       if (payload === "Por defecto")
-        return { ...state, allCharacters: [...state.supportAllCharacters] };
+        return { ...state, allCharacters: [...state.supportPage] };
       if (payload === "A")
         return {
           ...state,
@@ -86,7 +87,8 @@ export default function reducer(state = initialState, { type, payload }) {
       }
       return {
         ...state,
-        allCharacters: currentPage,
+        supportPage: [...currentPage],
+        allCharacters: [...currentPage],
       };
     }
 

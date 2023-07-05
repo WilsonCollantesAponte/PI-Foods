@@ -72,6 +72,8 @@ export default function Cards() {
     });
   }, [page]);
 
+  console.log(allCharacters);
+
   return (
     <div>
       <div className={m.bar}>
@@ -132,9 +134,14 @@ export default function Cards() {
           </button>
         )}
         <span className={m.middle}>{page}</span>
-        <button name="right" onClick={handleFilterByDiet}>
-          ➡
-        </button>
+
+        {allCharacters.length ? (
+          <button name="right" onClick={handleFilterByDiet}>
+            ➡
+          </button>
+        ) : (
+          <span>🐬</span>
+        )}
       </div>
 
       <div className={m.cards}>
