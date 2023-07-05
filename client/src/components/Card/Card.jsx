@@ -13,7 +13,7 @@ export default function Card(props) {
 
   return (
     <Link to={`/Detail/${id}`}>
-      <button>
+      <button className={m.button}>
         <div className={m.div}>
           <h1>{id}</h1>
           <h1>{title}</h1>

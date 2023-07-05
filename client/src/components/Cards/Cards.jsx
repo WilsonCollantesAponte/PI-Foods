@@ -20,7 +20,7 @@ import Card from "../Card/Card";
 export default function Cards() {
   const dispatch = useDispatch();
 
-  const { allCharacters } = useSelector((state) => state);
+  const { allCharacters, postedDiets } = useSelector((state) => state);
 
   const [searchInput, setSearchInput] = useState("");
   const [selectDiet, setSelectDiet] = useState("");
@@ -66,13 +66,11 @@ export default function Cards() {
 
   useEffect(() => {
     axios(`http://localhost:3001/recipes`).then(({ data }) => {
-      dispatch(add_character(data));
+      dispatch(add_character([...data, ...postedDiets]));
 
       dispatch(pager(page));
     });
   }, [page]);
-
-  console.log(page);
 
   return (
     <div>
@@ -119,6 +117,10 @@ export default function Cards() {
         <NavLink to="/Form">
           <button>Agregar nueva receta</button>
         </NavLink>
+
+        <NavLink to="/">
+          <button>Volver a la entreda</button>
+        </NavLink>
       </div>
 
       <div>
@@ -129,31 +131,35 @@ export default function Cards() {
             ⬅
           </button>
         )}
+        <span className={m.middle}>{page}</span>
         <button name="right" onClick={handleFilterByDiet}>
           ➡
         </button>
       </div>
 
-      {allCharacters?.length ? (
-        allCharacters.map((val) => {
-          return (
-            <Card
-              key={val.id}
-              id={val?.id}
-              title={val?.title}
-              image={val?.image}
-              diets={val?.diets}
-              healthScore={val?.healthScore}
-            />
-          );
-        })
-      ) : (
-        <div className={m.notFoundRecipes}>
-          <span className={m.span}>
-            No se han encontrado recetas, prueba buscar otras 😕
-          </span>
-        </div>
-      )}
+      <div className={m.cards}>
+        {allCharacters?.length ? (
+          allCharacters.map((val) => {
+            return (
+              <Card
+                className={m.card}
+                key={val.id}
+                id={val?.id}
+                title={val?.title}
+                image={val?.image}
+                diets={val?.diets}
+                healthScore={val?.healthScore}
+              />
+            );
+          })
+        ) : (
+          <div className={m.notFoundRecipes}>
+            <span className={m.span}>
+              No se han encontrado recetas, prueba buscar otras 😕
+            </span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

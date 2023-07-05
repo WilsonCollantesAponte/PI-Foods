@@ -4,6 +4,7 @@ import {
   ORDER_BY_HEALTHSCORE,
   ORDER_BY_TITLE,
   PAGER,
+  POSTED_DIETS,
 } from "../actions-types/action-types";
 
 export function add_character(characters) {
@@ -38,5 +39,12 @@ export function pager(page) {
   return {
     type: PAGER,
     payload: page,
+  };
+}
+
+export function posted_diets(newDiets) {
+  return {
+    type: POSTED_DIETS,
+    payload: newDiets,
   };
 }

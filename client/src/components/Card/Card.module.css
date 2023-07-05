@@ -1,3 +1,19 @@
 .div {
-  background-color: rebeccapurple;
+  background-color: rgb(95, 108, 155);
+  border-radius: 3rem;
+}
+
+.button {
+  margin: 2rem;
+  border-radius: 2rem;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255, 178, 178),
+    rgb(255, 255, 0),
+    rgb(255, 224, 167),
+    rgb(160, 255, 160),
+    rgb(164, 164, 255),
+    rgb(255, 178, 178)
+  );
+  background-repeat: repeat;
 }

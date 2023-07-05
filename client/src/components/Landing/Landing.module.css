@@ -1,0 +1,8 @@
+.mainDiv {
+  background-image: url("../../images/LandingPage-background.jpg");
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

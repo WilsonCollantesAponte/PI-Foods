@@ -9,7 +9,8 @@ const router = Router();
 
 // const { API_KEY } = process.env;
 // const API_KEY = "cc1af01257594a209c1e10a3462c5216";
-const API_KEY = "384bedc0979b4c47852047559c1f0b13";
+// const API_KEY = "384bedc0979b4c47852047559c1f0b13";
+const API_KEY = "1c2cb02e6df44567870da179264fed0f";
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
@@ -108,7 +109,7 @@ router.get("/recipes", async (req, res) => {
       res.status(200).json([...finalDataApi, ...finalDataDb]);
     } else {
       const { data } = await axios(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=20&addRecipeInformation=true`
       );
 
       const finalDataApi = data.results.map((val) => {

@@ -4,17 +4,20 @@ import {
   ORDER_BY_HEALTHSCORE,
   ORDER_BY_TITLE,
   PAGER,
+  POSTED_DIETS,
 } from "../actions-types/action-types";
 
 const initialState = {
   supportAllCharacters: [],
   allCharacters: [],
+  postedDiets: [],
 };
 
 export default function reducer(state = initialState, { type, payload }) {
   switch (type) {
     case ADD_CHARACTER:
       return {
+        ...state,
         allCharacters: payload,
         supportAllCharacters: payload,
       };
@@ -78,13 +81,20 @@ export default function reducer(state = initialState, { type, payload }) {
     case PAGER: {
       let currentPage = [];
       for (let index = 9; index > 0; index--) {
-        currentPage.push(state.supportAllCharacters[payload * 9 - index]);
+        if (state.supportAllCharacters[payload * 9 - index])
+          currentPage.push(state.supportAllCharacters[payload * 9 - index]);
       }
       return {
         ...state,
         allCharacters: currentPage,
       };
     }
+
+    case POSTED_DIETS:
+      return {
+        ...state,
+        postedDiets: [...state.postedDiets, payload],
+      };
 
     default:
       return state;

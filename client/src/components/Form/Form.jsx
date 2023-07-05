@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import validations from "./validations";
 import axios from "axios";
 
 import m from "./Form.module.css";
+import { posted_diets } from "../../redux/actions/actions";
 
 export default function Form() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [area, setArea] = useState("");
@@ -29,7 +32,7 @@ export default function Form() {
     "fodmap friendly": false,
   });
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const arrDiets = [];
@@ -37,12 +40,19 @@ export default function Form() {
       if (checkDiets[key]) arrDiets.push(key);
     }
 
-    axios.post("http://localhost:3001/recipes", {
+    const dietToSend = {
       ...formData,
       healthScore: +formData.healthScore,
       diets: arrDiets,
       steps: arrArea,
-    });
+    };
+
+    const { data } = await axios.post(
+      "http://localhost:3001/recipes",
+      dietToSend
+    );
+
+    dispatch(posted_diets(data));
 
     navigate("/FormCompleted");
   }
@@ -97,8 +107,6 @@ export default function Form() {
 
     setCheckDiets(copyCheckDiets);
   }
-
-  console.log(checkDiets);
 
   return (
     <form onSubmit={handleSubmit}>

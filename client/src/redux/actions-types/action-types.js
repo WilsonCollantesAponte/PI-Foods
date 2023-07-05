@@ -3,3 +3,4 @@ export const FILTER_BY_DIETS = "FILTER_BY_DIETS";
 export const ORDER_BY_TITLE = "ORDER_BY_TITLE";
 export const ORDER_BY_HEALTHSCORE = "ORDER_BY_HEALTHSCORE";
 export const PAGER = "PAGER";
+export const POSTED_DIETS = "POSTED_DIETS";
