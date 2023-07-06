@@ -137,11 +137,14 @@ export default function Form() {
 
         <label>Imagen</label>
         <input
-          type="url"
+          type="text"
           name="image"
           onChange={handleFormData}
           placeholder="                   url..."
         />
+        {formErrors.image ? (
+          <div className={m.error}>{formErrors.image}</div>
+        ) : null}
         <br />
 
         <label>Puntuacion de comida saludable</label>
