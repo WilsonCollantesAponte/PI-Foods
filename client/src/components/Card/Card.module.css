@@ -17,3 +17,7 @@
   );
   background-repeat: repeat;
 }
+
+.veryPopular {
+  background-color: yellow;
+}

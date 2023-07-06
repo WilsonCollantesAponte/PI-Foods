@@ -27,7 +27,7 @@ export default function reducer(state = initialState, { type, payload }) {
       return payload !== "Por defecto"
         ? {
             ...state,
-            allCharacters: [...state.allCharacters].filter((val) =>
+            allCharacters: [...state.supportPage].filter((val) =>
               val.diets?.includes(payload)
             ),
           }

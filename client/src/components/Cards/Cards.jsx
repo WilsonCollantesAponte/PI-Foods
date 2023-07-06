@@ -156,6 +156,7 @@ export default function Cards() {
                 image={val?.image}
                 diets={val?.diets}
                 healthScore={val?.healthScore}
+                veryPopular={val?.veryPopular}
               />
             );
           })

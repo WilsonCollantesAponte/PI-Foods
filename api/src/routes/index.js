@@ -9,9 +9,9 @@ const router = Router();
 
 // const { API_KEY } = process.env;
 // const API_KEY = "cc1af01257594a209c1e10a3462c5216";
-// const API_KEY = "384bedc0979b4c47852047559c1f0b13";
+const API_KEY = "384bedc0979b4c47852047559c1f0b13";
 // const API_KEY = "1dc56e1c3bb94709b7f677fbd5148483";
-const API_KEY = "d5927eee3ec747bea12a88435c38c7ff";
+// const API_KEY = "d5927eee3ec747bea12a88435c38c7ff";
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
@@ -115,7 +115,7 @@ router.get("/recipes", async (req, res) => {
       );
 
       const finalDataApi = data.results.map((val) => {
-        const { id, title, image, diets, healthScore } = val;
+        const { id, title, image, diets, healthScore, veryPopular } = val;
 
         const result = {
           id,
@@ -123,11 +123,13 @@ router.get("/recipes", async (req, res) => {
           image: null,
           diets: null,
           healthScore: null,
+          // veryPopular:null
         };
 
         if (image) result.image = image;
         if (healthScore) result.healthScore = healthScore;
         if (diets && diets.length) result.diets = diets;
+        result.veryPopular = veryPopular;
 
         return result;
       });
