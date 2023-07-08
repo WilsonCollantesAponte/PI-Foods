@@ -19,5 +19,6 @@
 }
 
 .veryPopular {
-  background-color: yellow;
+  background-color: rgb(95, 95, 23);
+  border-radius: 2rem;
 }

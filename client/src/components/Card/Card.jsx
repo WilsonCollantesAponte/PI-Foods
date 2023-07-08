@@ -15,41 +15,22 @@ export default function Card(props) {
 
   return (
     <Link to={`/Detail/${id}`}>
-      {veryPopular ? (
-        <button className={m.button}>
-          <div className={m.veryPopular}>
-            <h1>{id}</h1>
-            <h1>{title}</h1>
-            {diets && diets.length ? (
-              <div>
-                {/* <label>Diets: </label>  */}
-                <h2>{dietsParsed}</h2>
-              </div>
-            ) : (
-              <h2>Para esta receta no hay dietas que mostrar</h2>
-            )}
-            <h1>{healthScore}</h1>
-            <img src={image} alt="No hay una imagen disponible" />
-          </div>
-        </button>
-      ) : (
-        <button className={m.button}>
-          <div className={m.div}>
-            <h1>{id}</h1>
-            <h1>{title}</h1>
-            {diets && diets.length ? (
-              <div>
-                {/* <label>Diets: </label>  */}
-                <h2>{dietsParsed}</h2>
-              </div>
-            ) : (
-              <h2>Para esta receta no hay dietas que mostrar</h2>
-            )}
-            <h1>{healthScore}</h1>
-            <img src={image} alt="No hay una imagen disponible" />
-          </div>
-        </button>
-      )}
+      <button className={m.button}>
+        <div className={veryPopular ? m.veryPopular : m.div}>
+          <h1>{id}</h1>
+          <h1>{title}</h1>
+          {diets && diets.length ? (
+            <div>
+              {/* <label>Diets: </label>  */}
+              <h2>{dietsParsed}</h2>
+            </div>
+          ) : (
+            <h2>Para esta receta no hay dietas que mostrar</h2>
+          )}
+          <h1>{healthScore}</h1>
+          <img src={image} alt="No hay una imagen disponible" />
+        </div>
+      </button>
     </Link>
   );
 }
