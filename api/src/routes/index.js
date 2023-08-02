@@ -11,8 +11,8 @@ const router = Router();
 
 //En caso de que alguna API_KEY se gaste y se quede sin peticiones simplemente comentarla y descomentar otra
 // const API_KEY = "cc1af01257594a209c1e10a3462c5216";
-// const API_KEY = "384bedc0979b4c47852047559c1f0b13";
-const API_KEY = "1dc56e1c3bb94709b7f677fbd5148483";
+const API_KEY = "384bedc0979b4c47852047559c1f0b13";
+// const API_KEY = "1dc56e1c3bb94709b7f677fbd5148483";
 // const API_KEY = "d5927eee3ec747bea12a88435c38c7ff";
 
 // Configurar los routers
