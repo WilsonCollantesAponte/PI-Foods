@@ -65,6 +65,7 @@ export default function Cards() {
 
   useEffect(() => {
     axios(`${urlServer}recipes`).then(({ data }) => {
+      console.log(data);
       dispatch(add_character([...data, ...postedDiets]));
 
       dispatch(pager(page));
