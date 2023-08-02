@@ -1,3 +1,3 @@
 const urlServer = "https://pifoodspifoodspifoodspifoods.onrender.com/";
 
-export default urlServer;
+module.exports = urlServer;
