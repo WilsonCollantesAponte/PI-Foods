@@ -64,12 +64,15 @@ export default function Cards() {
   }
 
   useEffect(() => {
-    axios(`${urlServer}recipes`).then(({ data }) => {
-      console.log(data);
-      dispatch(add_character([...data, ...postedDiets]));
+    // axios(`${urlServer}recipes`).then(({ data }) => {
+    axios(`https://pifoodspifoodspifoodspifoods.onrender.com/recipes`).then(
+      ({ data }) => {
+        console.log(data);
+        dispatch(add_character([...data, ...postedDiets]));
 
-      dispatch(pager(page));
-    });
+        dispatch(pager(page));
+      }
+    );
   }, [page]);
 
   console.log(allCharacters);
