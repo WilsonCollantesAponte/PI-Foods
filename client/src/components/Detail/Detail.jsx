@@ -3,6 +3,7 @@ import m from "./Detail.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import urlServer from "../../server";
 
 export default function Detail(props) {
   const { id } = useParams();
@@ -10,7 +11,7 @@ export default function Detail(props) {
   let [character, setCharacter] = useState({});
 
   useEffect(() => {
-    axios(`http://localhost:3001/recipes/${id}`).then(({ data }) => {
+    axios(`${urlServer}recipes/${id}`).then(({ data }) => {
       setCharacter(data);
     });
   }, [id]);

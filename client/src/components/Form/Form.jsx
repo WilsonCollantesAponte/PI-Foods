@@ -6,6 +6,7 @@ import axios from "axios";
 
 import m from "./Form.module.css";
 import { posted_diets } from "../../redux/actions/actions";
+import urlServer from "../../server";
 
 export default function Form() {
   const dispatch = useDispatch();
@@ -48,7 +49,8 @@ export default function Form() {
     };
 
     const { data } = await axios.post(
-      "http://localhost:3001/recipes",
+      `${urlServer}recipes`,
+
       dietToSend
     );
 

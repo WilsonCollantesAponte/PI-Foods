@@ -16,6 +16,7 @@ import {
 import axios from "axios";
 
 import Card from "../Card/Card";
+import urlServer from "../../server";
 
 export default function Cards() {
   const dispatch = useDispatch();
@@ -57,15 +58,13 @@ export default function Cards() {
     setSelectHealthScore("Por defecto");
     setSelectTitle("Por defecto");
 
-    axios(`http://localhost:3001/recipes?name=${searchInput}`).then(
-      ({ data }) => {
-        dispatch(add_character(data));
-      }
-    );
+    axios(`${urlServer}recipes?name=${searchInput}`).then(({ data }) => {
+      dispatch(add_character(data));
+    });
   }
 
   useEffect(() => {
-    axios(`http://localhost:3001/recipes`).then(({ data }) => {
+    axios(`${urlServer}recipes`).then(({ data }) => {
       dispatch(add_character([...data, ...postedDiets]));
 
       dispatch(pager(page));
